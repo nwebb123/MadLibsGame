@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace MadLibsGame
 {
@@ -10,13 +11,19 @@ namespace MadLibsGame
                 This program is a simple MadLibs game, demonstrating string interpolation. String interpolation became a new feature in C# 6 and is the industry standard for joining multiple strings together.
 
                 TODO:
-                -Finish POC
-                -Clean up comments/code
-                -User Input validations; .ToLower for certain inputs, etc
-                -Clean up user view using line breaks/ascii characters
+                -Finish POC CHECK
+                -Clean up comments/code CHECK
+                -User Input validations; .ToLower for certain inputs, etc.  CHECK, need to figure out .ToTitleCase method for further validation CHECK
+                -Clean up user view using line breaks/ascii characters CHECK
+                -Add loop to make gameplay repeatable?
                 -Convert into Web App?
             */
-
+            
+            
+            // Creates a TextInfo based on the "en-US" culture.
+            TextInfo myTI = new CultureInfo("en-US", false).TextInfo;
+            
+            
             //Introduction
             Console.WriteLine("****************************** Welcome to MadLibs! ******************************");
             string storyTitle = "Title: 2021 in a Nutshell";
@@ -28,17 +35,23 @@ namespace MadLibsGame
             //User Inputs
             Console.WriteLine("Please enter a name.");
             string character = Console.ReadLine();
+            string characterCapitalized = myTI.ToTitleCase(character);
+
 
             Console.WriteLine("Please enter three adjectives, one after another. Hint: Adjectives are words that describe nouns, such as colors (blue), feelings (silly), or descriptions (soft, tall, sarcastic)");
             string adjectiveOne = Console.ReadLine();
             string adjectiveTwo = Console.ReadLine();
             string adjectiveThree = Console.ReadLine();
 
+            Console.WriteLine("Please enter the name of a pet. Ex) Mr.Floofy, goldfish, etc.");
+            string pet = Console.ReadLine();
+
             Console.WriteLine("Please enter a type of animal. Ex) Donkey, Giraffe, Squirrel, etc.");
             string animal = Console.ReadLine();
 
             Console.WriteLine("Please enter the name of a country. Ex) Wakanda, U.S.A., etc.");
             string country = Console.ReadLine();
+            string countryCapitalized = myTI.ToTitleCase(country);
 
             Console.WriteLine("Please enter a type of food. Ex) Yams, Frozen Pizza, ham, etc.");
             string food = Console.ReadLine();
@@ -52,6 +65,7 @@ namespace MadLibsGame
 
             Console.WriteLine("Please enter a name of a Super Hero. Ex) Spider Man, Prometheus, etc.");
             string superHero = Console.ReadLine();
+            string superHeroCapitalized = myTI.ToTitleCase(superHero);
 
             Console.WriteLine("Please enter a type of fruit. Ex) Grapes, Lettuce, etc.");
             string fruit = Console.ReadLine();
@@ -62,27 +76,17 @@ namespace MadLibsGame
             Console.WriteLine("Please enter a name for a dessert. Ex) Ice cream, cake, etc.");
             string dessert = Console.ReadLine();
 
+           
 
 
             //Variable holding story
-            string story = $"This morning {character} woke up feeling {adjectiveOne}.'It is going to be a {adjectiveTwo} day!' Outside, a bunch of {animal}s were protesting to keep {food} in stores. They began to {verbOne} to the rhythm of the {nounOne}, which made all the {fruit}s very {adjectiveThree}. Concerned, {character} texted {superHero}, who flew {character} to {country} and dropped {character} in a puddle of frozen {dessert}. {character} woke up in the year {year}, in a world where {nounTwo}s ruled the world.";
+            string story = $"This morning {characterCapitalized} woke up feeling {adjectiveOne.ToLower()}. \"It is going to be a {adjectiveTwo.ToLower()} day!\" {characterCapitalized} said to his pet {pet}.\nOutside, a bunch of {animal.ToLower()}s were protesting to keep {food.ToLower()} in stores.\nThey began to {verbOne.ToLower()} to the rhythm of the {nounOne.ToLower()}, which made all the {fruit.ToLower()}s very {adjectiveThree.ToLower()}.\nConcerned, {characterCapitalized} texted {superHeroCapitalized}, who flew {characterCapitalized} to {countryCapitalized} and dropped {characterCapitalized} in a puddle of frozen {dessert}.\n{characterCapitalized} woke up in the year {year}, in a world where {nounTwo.ToLower()}s ruled the world.";
 
             // Print the story:
             Console.WriteLine("Press any key to view the story!");
             Console.ReadLine();
             Console.WriteLine(story);
             Console.ReadLine();
-
-
-
-
-
-
-
-
-
-
-
 
         }
     }
